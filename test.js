@@ -1,63 +1,38 @@
-// const axios = require('axios')
+// const csvFilePath='./mergeLog.csv'
+// const csv=require('csvtojson')
+// const fs = require('fs')
+// csv()
+// .fromFile(csvFilePath)
+// .then((jsonObj)=>{
+//     console.log(jsonObj);
+//     fs.writeFileSync(`mergeLog.json`, JSON.stringify(jsonObj), "utf-8", (err) => {
+//         if(err){
+//             console.log(err)
+//         }
+//     })
+//     /**
+//      * [
+//      * 	{a:"1", b:"2", c:"3"},
+//      * 	{a:"4", b:"5". c:"6"}
+//      * ]
+//      */ 
+// })
 
-// const microsoftId = '59c00a43-6bbd-4356-8c4d-b9a8ec3c82b7'
-// const partnerId = 'BDF/lZQIQhlF3+cAL96a9CXBW47/fwA64d3YqY2O9us=	'
-// const bemoId = '2db28860-cd01-46ae-8fe4-20542598cafe'
+const axios = require('axios')
 
-// main()
+main()
 
-// async function main(){
-//     try{
-//         const res = await axios({
-//             method: 'post',
-//             url: `https://login.microsoftonline.com/59c00a43-6bbd-4356-8c4d-b9a8ec3c82b7/oauth2/token`,
-//             data: {
-//                 "grant_type": "client_credentials",
-//                 "client_secret": "BDF/lZQIQhlF3+cAL96a9CXBW47/fwA64d3YqY2O9us=",
-//                 "client_id": "2db28860-cd01-46ae-8fe4-20542598cafe",
-//                 "resource": "https://graph.windows.net"
-//             },
-//             headers: {
-//                 "Accept": "application/json",
-//                 "return-client-request-id": "true",
-//                 "Content-Type": "application/x-www-form-urlencoded; charset=utf-8",
-//                 "Host": "login.microsoftonline.com",
-//                 "Content-Length": "194",
-//                 "Expect": "100-continue"
-//               }
-//         })
-//         console.log(res)
-//     }catch(err){
-
-//         console.log(err.response)
-//         console.log(Object.keys(err))
-        
-//     }
-// }
-
-var axios = require('axios');
-var FormData = require('form-data');
-var data = new FormData();
-data.append('resource', 'https://graph.windows.net');
-data.append('client_id', '2db28860-cd01-46ae-8fe4-20542598cafe');
-data.append('client_secret', 'BDF/lZQIQhlF3+cAL96a9CXBW47/fwA64d3YqY2O9us=');
-data.append('grant_type', 'client_credentials');
-
-var config = {
-  method: 'post',
-  url: 'https://login.microsoftonline.com/59c00a43-6bbd-4356-8c4d-b9a8ec3c82b7/oauth2/token',
-  headers: { 
-    'Cookie': 'fpc=Ai3xkjbaFcZIgf97pOvJyI1j4KCdAQAAAIBTf9sOAAAA; stsservicecookie=estsfd; x-ms-gateway-slice=estsfd', 
-    ...data.getHeaders()
-  },
-  data : data
-};
-
-axios(config)
-.then(function (response) {
-  console.log(JSON.stringify(response.data));
-})
-.catch(function (error) {
-  console.log(error);
-});
-
+async function main(){
+    try {
+        const removeAssocRes = axios({
+            method:'delete',
+            url: `https://api.hubapi.com/crm/v4/objects/contacts/1351/associations/companies/8344861213`,
+            headers: {
+                "Authorization": "Bearer pat-na1-703f92b7-b847-4e46-a85f-a4063ca56411"    
+            }
+        })
+        console.log(Object.keys(removeAssocRes))
+    } catch (error) {
+        console.log(error)
+    }
+}

@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "axios": "^1.2.2",
+    "csvtojson": "^2.0.10",
     "inquirer": "^8.2.5",
     "mongoose": "^6.8.3"
   }
